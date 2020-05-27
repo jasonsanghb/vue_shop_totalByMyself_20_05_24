@@ -15,9 +15,7 @@
                     <el-button type="primary" @click="login">登录</el-button>
                     <el-button type="info" @click="resetLoginForm">重置</el-button>
                 </el-form-item>
-
             </el-form>
-
         </div>
     </div>
 </template>
@@ -57,9 +55,11 @@
 
                         return this.$message.error('登录失败')
                     }
-                    this.$message.success('登录成功')
-                    this.resetLoginForm()
+
+                    // 把token存储到sessionStorage中
+                    window.sessionStorage.setItem('token',res.data.token)
                     this.$router.push('/home')
+                    this.$message.success('登录成功')
                 })
             }
         }
