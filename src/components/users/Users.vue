@@ -119,7 +119,7 @@
             <div class="currentRole">当前的角色：{{currentDistributeRoleUser.role_name}}</div>
             <div>
                 分配新角色：
-                <el-select v-model="currentDistributeRoleUser.rid" placeholder="请选择">
+                <el-select v-model="selectedRoleId" placeholder="请选择">
                     <el-option
                         v-for="item in rolesList"
                         :key="item.id"
@@ -202,7 +202,9 @@
                 // 当前正在分配角色的用户
                 currentDistributeRoleUser: {},
                 // 角色数组
-                rolesList: []
+                rolesList: [],
+                // 已选中角色id
+                selectedRoleId:''
 
 
             };
@@ -331,15 +333,18 @@
             },
             // 点击按钮 分配权限对话框关闭
             distributeRoleDialogClosed() {
-                this.currentDistributeRoleUser.rid = '';
+
+                this.currentDistributeRoleUser={};
+                this.selectedRoleId= ''
+
             },
             // 点击按钮 分配角色
             async distributeRole() {
 
                 // 先判断是否有选择新角色
-                if (this.currentDistributeRoleUser.rid) {
+                if (this.selectedRoleId) {
 
-                    const { data: res } = await this.$http.put(`users/${this.currentDistributeRoleUser.id}/role`, { rid: this.currentDistributeRoleUser.rid });
+                    const { data: res } = await this.$http.put(`users/${this.currentDistributeRoleUser.id}/role`, { rid: this.selectedRoleId });
                     if (res.meta.status !== 200) {
                         return this.$message.error('设置角色失败');
                     }
