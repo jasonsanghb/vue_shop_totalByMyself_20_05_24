@@ -11,3 +11,6 @@ html,body,#app{
     font-size: 12px;
     margin: 15px 0;
 }
+.el-cascader-menu {
+    height: 250px;
+}
