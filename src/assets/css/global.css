@@ -14,3 +14,9 @@ html,body,#app{
 .el-cascader-menu {
     height: 250px;
 }
+.el-step__title{
+    font-size: 12px!important;
+}
+.ql-editor{
+    min-height: 300px;
+}
