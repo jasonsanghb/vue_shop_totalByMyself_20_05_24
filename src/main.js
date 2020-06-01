@@ -13,14 +13,24 @@ import axios from 'axios'
 import ZkTable from 'vue-table-with-tree-grid'
 // 导入富文本编辑器js
 import VueQuillEditor from 'vue-quill-editor'
+
 // 导入富文本编辑器css
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
+// 导入nprogress的js
+import NProgress from 'nprogress'
+// 导入nprogress的css
+import 'nprogress/nprogress.css'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 设置请求头信息
 axios.interceptors.request.use(config=>{
     config.headers.Authorization = window.sessionStorage.getItem('token')
+    NProgress.start()
+    return config
+})
+axios.interceptors.response.use(config=>{
+    NProgress.done()
     return config
 })
 Vue.prototype.$http = axios

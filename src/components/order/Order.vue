@@ -132,7 +132,7 @@
         }
     }
 </script>
-<style scoped>
+<style scoped lang="less">
     .el-cascader{
         width: 100%;
     }
